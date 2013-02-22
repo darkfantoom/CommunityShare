@@ -135,8 +135,8 @@ public class PersoonMapper {
 			}
 
 			catch (SQLException sqlException) {
-			JOptionPane.showMessageDialog(null, sqlException.getMessage(),
-					"Database Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.print("Database Error");
+                        sqlException.getMessage();
 
 			System.exit(1);
 			}
