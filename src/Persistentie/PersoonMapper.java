@@ -21,7 +21,7 @@ public class PersoonMapper {
     private final static String LEES_PERSOON_SQL = "SELECT * FROM Personeel Order by Naam asc";
     private Persoon Pers;
 	
-	public Persoon logIn(String FacebookAccount, String TwitterAccount)
+	public Persoon logIn(String facebookAccount, String twitterAccount)
 	{
 		
 	
@@ -32,22 +32,22 @@ public class PersoonMapper {
 	    {
 		
 		Statement s = c.getConnection().createStatement();
-		ResultSet rs = s.executeQuery("SELECT * FROM Persoon WHERE FacebookAccount ='"+FacebookAccount+"' OR TwitterAccount='"+TwitterAccount+"'");
+		ResultSet rs = s.executeQuery("SELECT * FROM Persoon WHERE FacebookAccount ='"+facebookAccount+"' OR TwitterAccount='"+twitterAccount+"'");
 		//gaat in database zoeken waar wachtwoord en userid overeenkomen en haalt dat object eruit eruit 
 		rs.next();
 		//FacebookAccount=rs.getString("FacebookAccount");
                 
 			
-		if(rs.getString("FacebookAccount").equals(FacebookAccount))
+		if(rs.getString("FacebookAccount").equals(facebookAccount))
 		{
-                    TwitterAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),TwitterAccount);
+                    twitterAccount = null;
+                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),twitterAccount);
 	
 		}
-                if(rs.getString("TwitterAccount").equals(TwitterAccount))
+                if(rs.getString("TwitterAccount").equals(twitterAccount))
                 {
-                     FacebookAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), FacebookAccount,rs.getString("TwitterAccount"));
+                     facebookAccount = null;
+                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
                 }
 	   }
 	    
@@ -79,17 +79,17 @@ public class PersoonMapper {
 			ResultSet rs = statement.executeQuery("SELECT FacebookAccount,TwitterAccount,Score FROM Persoon ORDER BY Score desc");
 			
 			while (rs.next()) {
-                                 int PersoonNr = 0;
+                                 int persoonNr = 0;
                                  
                                  if(rs.getString("TwitterAccount").equals(null))
                                  {
-                                     String TwitterAccount = "geen";
-                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"), rs.getString("FacebookAccount"), TwitterAccount);
+                                     String twitterAccount = "geen";
+                                     Pers = new Persoon(persoonNr, rs.getInt("Score"), rs.getString("FacebookAccount"), twitterAccount);
                                  }
                                  else
                                  {
-                                     String FacebookAccount = "geen";
-                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"), FacebookAccount,rs.getString("TwitterAccount"));
+                                     String facebookAccount = "geen";
+                                     Pers = new Persoon(persoonNr, rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
                                  }
 				PersoonLijst.add(Pers);
 				

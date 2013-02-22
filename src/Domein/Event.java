@@ -6,8 +6,8 @@ import java.util.List;
 
 public class Event extends Melding
 {
-    private String Type;
-    private String Categorie;
+    private String type;
+    private String categorie;
     
 
 	
@@ -17,32 +17,32 @@ public class Event extends Melding
 	public Event(String Type, String Categorie) 
         {
 		super();
-		this.Type = Type;
-                this.Categorie = Categorie;
+		this.type = Type;
+                this.categorie = Categorie;
         }
 
     
     public String getType() 
     {
-        return Type;
+        return type;
     }
 
   
-    public void setType(String Type) 
+    public void setType(String type) 
     {
-        this.Type = Type;
+        this.type = type;
     }
 
     
     public String getCategorie() 
     {
-        return Categorie;
+        return categorie;
     }
 
    
-    public void setCategorie(String Categorie) 
+    public void setCategorie(String categorie) 
     {
-        this.Categorie = Categorie;
+        this.categorie = categorie;
     }
         
 	
