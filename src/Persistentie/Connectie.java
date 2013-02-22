@@ -6,7 +6,6 @@ package Persistentie;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
 import java.sql.Connection;
 
 /**
@@ -45,8 +44,7 @@ public class Connectie
                 }
                 catch (SQLException e)
                 {
-                    JOptionPane.showMessageDialog(null, "Afsluiten van "
-                    + "databank-connectie mislukt.");
+                    System.out.print("Afsluiten van " + "databank-connectie mislukt.");   
                     e.printStackTrace();
                 }
             }
