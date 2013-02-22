@@ -13,9 +13,9 @@ import java.util.List;
 public class GevaarVeld extends Melding {
 
     private String Type;
-    private List Categorie;
+    private String Categorie;
 
-    public GevaarVeld(String Type, List Categorie) 
+    public GevaarVeld(String Type, String Categorie) 
     {
         this.Type = Type;
         this.Categorie = Categorie;
@@ -31,12 +31,12 @@ public class GevaarVeld extends Melding {
         this.Type = Type;
     }
 
-    public List getCategorie() 
+    public String getCategorie() 
     {
         return Categorie;
     }
 
-    public void setCategorie(List Categorie) 
+    public void setCategorie(String Categorie) 
     {
         this.Categorie = Categorie;
     }

@@ -13,14 +13,14 @@ import java.util.List;
 public class Event extends Melding
 {
     private String Type;
-    private List Categorie;
+    private String Categorie;
     
 
 	
 
 
 
-	public Event(String Type, List Categorie) 
+	public Event(String Type, String Categorie) 
         {
 		super();
 		this.Type = Type;
@@ -44,14 +44,14 @@ public class Event extends Melding
     /**
      * @return the Categorie
      */
-    public List getCategorie() {
+    public String getCategorie() {
         return Categorie;
     }
 
     /**
      * @param Categorie the Categorie to set
      */
-    public void setCategorie(List Categorie) {
+    public void setCategorie(String Categorie) {
         this.Categorie = Categorie;
     }
         
