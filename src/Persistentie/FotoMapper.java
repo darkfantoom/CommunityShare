@@ -74,7 +74,9 @@ public class FotoMapper
 
 		catch (SQLException sqlException) 
 		{
-			JOptionPane.showMessageDialog(null, sqlException.getMessage(),"Database Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.print("Database Error");
+                        sqlException.getMessage();
+                        
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
