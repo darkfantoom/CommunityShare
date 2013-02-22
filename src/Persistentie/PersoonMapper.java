@@ -28,8 +28,8 @@ public class PersoonMapper {
 		
 		Connectie c = new Connectie();
 		
-		try
-	    {
+	try
+             {
 		
 		Statement s = c.getConnection().createStatement();
 		ResultSet rs = s.executeQuery("SELECT * FROM Persoon WHERE FacebookAccount ='"+facebookAccount+"' OR TwitterAccount='"+twitterAccount+"'");
