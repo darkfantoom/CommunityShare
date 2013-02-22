@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 
 public class FotoMapper
