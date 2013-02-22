@@ -12,7 +12,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.imageio.ImageIO;
-import javax.swing.JOptionPane;
 
 
 public class FotoMapper
@@ -74,7 +73,9 @@ public class FotoMapper
 
 		catch (SQLException sqlException) 
 		{
-			JOptionPane.showMessageDialog(null, sqlException.getMessage(),"Database Error", JOptionPane.ERROR_MESSAGE);
+                        System.out.print("Database Error");
+                        sqlException.getMessage();
+                        
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
