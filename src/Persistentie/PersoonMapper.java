@@ -41,13 +41,13 @@ public class PersoonMapper {
 		if(rs.getString("FacebookAccount").equals(FacebookAccount))
 		{
                     TwitterAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("Email"), rs.getString("FacebookAccount"),TwitterAccount);
+                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),TwitterAccount);
 	
 		}
                 if(rs.getString("TwitterAccount").equals(TwitterAccount))
                 {
                      FacebookAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("Email"),FacebookAccount,rs.getString("TwitterAccount"));
+                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), FacebookAccount,rs.getString("TwitterAccount"));
                 }
 	   }
 	    
@@ -80,16 +80,16 @@ public class PersoonMapper {
 			
 			while (rs.next()) {
                                  int PersoonNr = 0;
-                                 String Email = null;
+                                 
                                  if(rs.getString("TwitterAccount").equals(null))
                                  {
                                      String TwitterAccount = "geen";
-                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"),Email, rs.getString("FacebookAccount"), TwitterAccount);
+                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"), rs.getString("FacebookAccount"), TwitterAccount);
                                  }
                                  else
                                  {
                                      String FacebookAccount = "geen";
-                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"),Email, FacebookAccount,rs.getString("TwitterAccount"));
+                                     Pers = new Persoon(PersoonNr, rs.getInt("Score"), FacebookAccount,rs.getString("TwitterAccount"));
                                  }
 				PersoonLijst.add(Pers);
 				
@@ -120,14 +120,13 @@ public class PersoonMapper {
 					
 					
 				
-					String sql ="INSERT INTO Persoon(PersoonNr,Score,Email,FacebookAccount,TwitterAccount) VALUES(?,?,?,?,?)";
+					String sql ="INSERT INTO Persoon(PersoonNr,Score,Email,FacebookAccount,TwitterAccount) VALUES(?,?,?,?)";
 					
 				PreparedStatement pstmt = connecti.getConnection().prepareStatement(sql);
 				pstmt.setInt(1, Pers.getPersoonNr());	
                                 pstmt.setInt(2, Pers.getScore());
-				pstmt.setString(3, Pers.getEmail());
-				pstmt.setString(4, Pers.getFacebookAccount());
-                                pstmt.setString(5, Pers.getTwitterAccount());
+				pstmt.setString(3, Pers.getFacebookAccount());
+                                pstmt.setString(4, Pers.getTwitterAccount());
 				
 				pstmt.executeUpdate();
 				

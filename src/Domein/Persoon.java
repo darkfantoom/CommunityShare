@@ -11,12 +11,11 @@ package Domein;
 public class Persoon 
 {
     private int PersoonNr ,Score ;
-    private String Email , FacebookAccount , TwitterAccount;
+    private String  FacebookAccount , TwitterAccount;
 
-    public Persoon(int PersoonNr, int Score, String Email, String FacebookAccount, String TwitterAccount) {
+    public Persoon(int PersoonNr, int Score,  String FacebookAccount, String TwitterAccount) {
         this.PersoonNr = PersoonNr;
         this.Score = Score;
-        this.Email = Email;
         this.FacebookAccount = FacebookAccount;
         this.TwitterAccount = TwitterAccount;
     }
@@ -42,13 +41,6 @@ public class Persoon
         this.Score = Score;
     }
 
-    public String getEmail() {
-        return Email;
-    }
-
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
 
     public String getFacebookAccount() {
         return FacebookAccount;
