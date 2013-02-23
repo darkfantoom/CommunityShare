@@ -89,7 +89,11 @@ public class ReactieMapper {
                   ResultSet rs = statement.executeQuery("SELECT PersoonNr, Reactie FROM Reactie WHERE "
                            + "MeldingNr = '"+meldingNr+"' "
                            + "ORDER BY Datum");
-
+                  
+                  while(rs.next()){
+                          Reactie re = new Reactie(meldingNr,rs.getInt("PersoonNr"), rs.getString("Reactie"));
+                          reactieLijst.add(re);
+                  }
            }
            catch (SQLException e) 
 		{
