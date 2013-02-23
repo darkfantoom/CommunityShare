@@ -4,7 +4,7 @@
  */
 package Persistentie;
 
-import Domein.Persoon;
+
 import Domein.Reactie;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
