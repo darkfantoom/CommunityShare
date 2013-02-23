@@ -24,7 +24,11 @@ public class LikeMapper {
         Statement statement;
         try{
             statement = connecti.getConnection().createStatement();
-            String sql=("INSERT INTO Like( MeldingNr,PersoonNr,Liken )VALUES(?,?,?)");
+            String sql=("INSERT INTO Like( "
+                    + "MeldingNr,"
+                    + "PersoonNr,"
+                    + "Liken )"
+                    + "VALUES(?,?,?)");
             
             PreparedStatement pstmt = connecti.getConnection().prepareStatement(sql);
             pstmt.setInt(1,l.getMeldingNr());
@@ -45,12 +49,16 @@ public class LikeMapper {
     }
     
     // verwijderen van like
-    public void verwijderVanEenLike(Like l){
+    public void verwijderenVanEenLike(Like l){
          Connectie connecti = new Connectie();
          Statement statement;
         try{
             statement= connecti.getConnection().createStatement();
-            String sql= ("DELETE FROM Like ( MeldingNr,PersoonNr,Liken )VALUES(?,?,?)");
+            String sql= ("DELETE FROM Like WHERE("
+                    + "MeldingNr"
+                    + "PersoonNr,"
+                    + "Liken )"
+                    + "VALUES(?,?,?)");
             
             PreparedStatement pstmt = connecti.getConnection().prepareStatement(sql);
              pstmt.setInt(1, l.getMeldingNr());
