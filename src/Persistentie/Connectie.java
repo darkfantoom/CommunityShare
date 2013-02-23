@@ -11,7 +11,7 @@ import java.sql.Connection;
 /**
  *
  * @author arne
- */
+ */ 
 public class Connectie 
 {
     	private Connection conn = null;
