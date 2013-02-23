@@ -18,7 +18,8 @@ import java.util.List;
  */
 public class PersoonMapper {
    
-    private Persoon Pers;
+    private Persoon pers;
+    private Persoon pers2;
 	
 	public Persoon logIn(String facebookAccount, String twitterAccount)
 	{
@@ -40,13 +41,13 @@ public class PersoonMapper {
 		if(rs.getString("FacebookAccount").equals(facebookAccount))
 		{
                     twitterAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),twitterAccount);
+                    pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),twitterAccount);
 	
 		}
                 if(rs.getString("TwitterAccount").equals(twitterAccount))
                 {
                      facebookAccount = null;
-                    Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
+                    pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
                 }
 	   }
 	    
@@ -54,7 +55,7 @@ public class PersoonMapper {
 		{
 			
 		}
-		return Pers;
+		return pers;
 
 	}
 	
@@ -83,14 +84,14 @@ public class PersoonMapper {
                                  if(rs.getString("TwitterAccount").equals(null))
                                  {
                                      String twitterAccount = "geen";
-                                     Pers = new Persoon(persoonNr, rs.getInt("Score"), rs.getString("FacebookAccount"), twitterAccount);
+                                     pers2 = new Persoon(persoonNr, rs.getInt("Score"), rs.getString("FacebookAccount"), twitterAccount);
                                  }
                                  else
                                  {
                                      String facebookAccount = "geen";
-                                     Pers = new Persoon(persoonNr, rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
+                                     pers2 = new Persoon(persoonNr, rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
                                  }
-				PersoonLijst.add(Pers);
+				PersoonLijst.add(pers2);
 				
 				
 					
