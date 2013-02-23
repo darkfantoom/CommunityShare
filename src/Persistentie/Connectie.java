@@ -69,5 +69,4 @@ public class Connectie
         private void showMessage(String message){
 		System.out.println("Database: " + message);
 	}      
-        
 }
