@@ -6,6 +6,7 @@ package Persistentie;
 
 
 import Domein.Reactie;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -28,13 +29,15 @@ public class ReactieMapper {
             String sql=("INSERT INTO Reactie( "
                     + "MeldingNr,"
                     + "PersoonNr,"
-                    + "Reactie )"
-                    + "VALUES(?,?,?)");
+                    + "Reactie "
+                    + "Datum)"
+                    + "VALUES(?,?,?,?)");
             
             PreparedStatement pstmt = connect.getConnection().prepareStatement(sql);
             pstmt.setInt(1,r.getMeldingNr());
             pstmt.setInt(2,r.getPersoonNr());
             pstmt.setString(3,r.getReactie());
+            pstmt.setDate(4, r.getDatum());
             
             pstmt.executeUpdate();
             connect.closeConnection();
@@ -91,7 +94,8 @@ public class ReactieMapper {
                            + "ORDER BY Datum");
                   
                   while(rs.next()){
-                          Reactie re = new Reactie(meldingNr,rs.getInt("PersoonNr"), rs.getString("Reactie"));
+                            Date datum=null;
+                          Reactie re = new Reactie(meldingNr,rs.getInt("PersoonNr"), rs.getString("Reactie"),datum);
                           reactieLijst.add(re);
                   }
            }

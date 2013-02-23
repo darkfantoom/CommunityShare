@@ -4,6 +4,8 @@
  */
 package Domein;
 
+import java.sql.Date;
+
 /**
  *
  * @author arne
@@ -12,11 +14,21 @@ public class Reactie
 {
     private int meldingNr,persoonNr;
     private String reactie;
+    private Date datum;
 
-    public Reactie(int meldingNr, int persoonNr, String reactie) {
+    public Reactie(int meldingNr, int persoonNr, String reactie, Date datum) {
         this.meldingNr = meldingNr;
         this.persoonNr = persoonNr;
         this.reactie = reactie;
+        this.datum = datum;
+    }
+
+    public Date getDatum() {
+        return datum;
+    }
+
+    public void setDatum(Date datum) {
+        this.datum = datum;
     }
 
     public int getMeldingNr() {
