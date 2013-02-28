@@ -14,7 +14,7 @@ import java.sql.Statement;
 import javax.imageio.ImageIO;
 
 
-public class FotoMapper
+public class FotoDAO
 {
     //private final static String LEES_Foto_SQL = "SELECT * FROM Foto Order by FotoNr asc";
     private Foto F;

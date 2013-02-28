@@ -16,7 +16,7 @@ import java.util.List;
  *
  * @author arne
  */
-public class PersoonMapper {
+public class PersoonDAO {
    
     private Persoon Pers;
 	
