@@ -14,7 +14,7 @@ import java.sql.Statement;
  *
  * @author arne
  */
-public class LikeMapper {
+public class LikeDAO {
     
     //zoeken niet nodig
     

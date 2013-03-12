@@ -1,39 +1,45 @@
-
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package Persistentie;
 
-import Domein.Event;
-import java.io.IOException;
+
+import Domein.GevaarVeld;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-
 import java.util.List;
 
-public class EventMapper 
+/**
+ *
+ * @author arne
+ */
+public class GevaarVeldDAO
 {
-    private Event e;
+      private GevaarVeld gv;
  
 
 
 	//deze klasse is voor gegevens in de databank te steken, uit te halen, up te date en te verwijderen voor de table Inbox 
 	
-	public List<Event> geefLijstEvent(String gemeente) 
+	public List<GevaarVeld> geefLijstGevaarVeld(String gemeente) 
 	{
-		List<Event> Gegevenslijst = new ArrayList<Event>();
+		List<GevaarVeld> Gegevenslijst = new ArrayList<GevaarVeld>();
 		Statement statement;
 		Connectie connect = new Connectie();
 		
 		try 
 		{
 			statement = connect.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT MeldingNr, Omschrijving FROM Event WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
+			ResultSet rs = statement.executeQuery("SELECT MeldingNr, Omschrijving FROM GevaarVeld WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
 			
 			while (rs.next()) 
 			{
-                                   String categorieEvent=null;
+                                   String categorieGevaar=null;
                                    int persoonNr=0;
                                    int fotoNr=0;
                                     int teller=0;
@@ -41,7 +47,7 @@ public class EventMapper
                                     String gemeent = null;
                                      Date datum= null;
 				 
-				Event e = new Event(categorieEvent,
+				GevaarVeld e = new GevaarVeld(categorieGevaar,
                                         rs.getInt("MeldingNr"),
                                         persoonNr,
                                         fotoNr,
@@ -63,13 +69,13 @@ public class EventMapper
 		}
 		return Gegevenslijst;
 	}
-	public void verwijderenVanEenEvent(int meldingNr,int persoonNr) 
+	public void verwijderenVanEenGevaarVeld(int meldingNr,int persoonNr) 
 	{
                 Connectie connect = new Connectie();
 		
 			try
                         {
-				String sql="DELETE FROM Event WHERE ("
+				String sql="DELETE FROM GevaarVeld WHERE ("
                                         + "MeldingNr,"
                                         + "PersoonNr) "
                                         + "VALUES(?,?)";			
@@ -81,20 +87,20 @@ public class EventMapper
                         }
 			catch(SQLException e)
 			{
-				System.out.println("deze event bestaat niet of u bent niet eigenaar van dit event ");				
+				System.out.println("deze event bestaat niet of u bent niet eigenaar van dit Gevaarsveld ");				
 			}
 			
 		
 	} 
-	public void aanmakenVanEenEvent(Event e) 
+	public void aanmakenVanEenGevaarVeld(GevaarVeld gv) 
 	{
                 Connectie connect = new Connectie();
 
                         try
                         {
                         // String categorieEvent, int meldingNr, int persoonNr, int fotoNr, int teller, String straatNaam, String gemeente, String omschrijving, Date datum		
-			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO Event("
-                                + "CategorieEvent,"
+			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO GevaarVeld("
+                                + "CategorieGevaar,"
                                 + "MeldingNr,"
                                 + "PersoonNr,"
                                 + "FotoNr,"
@@ -104,15 +110,15 @@ public class EventMapper
                                 + "omschrijving,"
                                 + "datum) "
                                 + "VALUES(?,?,?,?,?,?,?,?,?)");
-			pstmt.setString(1, e.getCategorie());
-                        pstmt.setInt(2, e.getMeldingNr());
-                        pstmt.setInt(3,e.getPersoonNr());
-                        pstmt.setInt(4,e.getFotoNr());
-                        pstmt.setInt(5,e.getTeller());
-                        pstmt.setString(6,e.getStraatNaam());
-                        pstmt.setString(7, e.getGemeente());
-                        pstmt.setString(8, e.getOmschrijving());
-                        pstmt.setDate(9, e.getDatum());
+			pstmt.setString(1, gv.getCategorie());
+                        pstmt.setInt(2, gv.getMeldingNr());
+                        pstmt.setInt(3,gv.getPersoonNr());
+                        pstmt.setInt(4,gv.getFotoNr());
+                        pstmt.setInt(5,gv.getTeller());
+                        pstmt.setString(6,gv.getStraatNaam());
+                        pstmt.setString(7, gv.getGemeente());
+                        pstmt.setString(8, gv.getOmschrijving());
+                        pstmt.setDate(9, gv.getDatum());
                         
 					
 						
@@ -125,7 +131,7 @@ public class EventMapper
 			System.out.println("Database error");
 		} 
 	}    
-    public Event zoekLijst(int meldingNr)
+    public GevaarVeld zoekLijstGevaarVeld(int meldingNr)
 	{
 		
 		Statement statement;
@@ -134,7 +140,7 @@ public class EventMapper
 		try
 	    {
 		statement = connect.getConnection().createStatement();
-		ResultSet rs = statement.executeQuery("SELECT * FROM Event WHERE MeldingNr ='"+meldingNr+"'");
+		ResultSet rs = statement.executeQuery("SELECT * FROM GevaarVeld WHERE MeldingNr ='"+meldingNr+"'");
 	
 		while(rs.next())
 		{
@@ -142,7 +148,7 @@ public class EventMapper
 			 
 				
 
-			 e = new Event(rs.getString("CategorieEvent"),
+			 gv = new GevaarVeld(rs.getString("CategorieGevaar"),
                          rs.getInt("meldingNr"),
                          rs.getInt("PersoonNr"),
                          rs.getInt("FotoNr"),
@@ -159,9 +165,11 @@ public class EventMapper
 	    }
 		catch(SQLException e)
 		{
-			System.out.println( "Event bestaat niet!");
+			System.out.println( "Gevaar bestaat niet!");
 			
 		} 
-		return e;
+		return gv;
 	}
 }
+    
+

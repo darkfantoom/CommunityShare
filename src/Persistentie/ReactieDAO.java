@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author arne
  */
-public class ReactieMapper {
+public class ReactieDAO {
     
     //aanmaken van een reactie
     public void aanmakenVanEenReactie(Reactie r){
