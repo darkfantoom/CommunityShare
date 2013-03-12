@@ -28,7 +28,7 @@ public class FotoDAO
 		try 
 		{
 			statement = connecti.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM Foto WHERE FotoNr ='"+fotoNr+"'");
+			ResultSet rs = statement.executeQuery("SELECT * FROM foto WHERE FotoNr ='"+fotoNr+"'");
 			
                         Blob Foto=rs.getBlob("Foto");				 
                         InputStream imageBlobStream=Foto.getBinaryStream();
@@ -62,7 +62,7 @@ public class FotoDAO
 			//Statement s = connecti.getConnection().createStatement();//connectie maken
 			//ResultSet rs = s.executeQuery("SELECT FotoNr FROM Foto ORDER BY FotoNr desc");
 			//rs.next();			
-			PreparedStatement pstmt = connecti.getConnection().prepareStatement("INSERT INTO Foto(FotoNr,Foto) VALUES(?,?)");
+			PreparedStatement pstmt = connecti.getConnection().prepareStatement("INSERT INTO foto(FotoNr,Foto) VALUES(?,?)");
 			pstmt.setInt(1, F.getFotoNr());
 			pstmt.setBlob(2, Foto);
 			

@@ -29,7 +29,7 @@ public class EventDAO
 		try 
 		{
 			statement = connect.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT MeldingNr, Omschrijving FROM Event WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
+			ResultSet rs = statement.executeQuery("SELECT EventNr, Omschrijving FROM event WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
 			
 			while (rs.next()) 
 			{
@@ -42,7 +42,7 @@ public class EventDAO
                                      Date datum= null;
 				 
 				Event e = new Event(categorieEvent,
-                                        rs.getInt("MeldingNr"),
+                                        rs.getInt("EventNr"),
                                         persoonNr,
                                         fotoNr,
                                         teller,
@@ -63,18 +63,18 @@ public class EventDAO
 		}
 		return Gegevenslijst;
 	}
-	public void verwijderenVanEenEvent(int meldingNr,int persoonNr) 
+	public void verwijderenVanEenEvent(int eventNr,int persoonNr) 
 	{
                 Connectie connect = new Connectie();
 		
 			try
                         {
-				String sql="DELETE FROM Event WHERE ("
-                                        + "MeldingNr,"
+				String sql="DELETE FROM event WHERE ("
+                                        + "EventNr,"
                                         + "PersoonNr) "
                                         + "VALUES(?,?)";			
 				PreparedStatement pstmt = connect.getConnection().prepareStatement(sql);	
-                                pstmt.setInt(1, meldingNr);
+                                pstmt.setInt(1, eventNr);
 				pstmt.executeUpdate();
 				pstmt.close();										
 				connect.closeConnection();
@@ -93,9 +93,9 @@ public class EventDAO
                         try
                         {
                         // String categorieEvent, int meldingNr, int persoonNr, int fotoNr, int teller, String straatNaam, String gemeente, String omschrijving, Date datum		
-			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO Event("
+			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO event("
                                 + "CategorieEvent,"
-                                + "MeldingNr,"
+                                + "EventNr,"
                                 + "PersoonNr,"
                                 + "FotoNr,"
                                 + "Teller,"
@@ -105,7 +105,7 @@ public class EventDAO
                                 + "datum) "
                                 + "VALUES(?,?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, e.getCategorie());
-                        pstmt.setInt(2, e.getMeldingNr());
+                        pstmt.setInt(2, e.getEventNr());
                         pstmt.setInt(3,e.getPersoonNr());
                         pstmt.setInt(4,e.getFotoNr());
                         pstmt.setInt(5,e.getTeller());
@@ -125,7 +125,7 @@ public class EventDAO
 			System.out.println("Database error");
 		} 
 	}    
-    public Event zoekLijst(int meldingNr)
+    public Event zoekLijst(int eventNr)
 	{
 		
 		Statement statement;
@@ -134,7 +134,7 @@ public class EventDAO
 		try
 	    {
 		statement = connect.getConnection().createStatement();
-		ResultSet rs = statement.executeQuery("SELECT * FROM Event WHERE MeldingNr ='"+meldingNr+"'");
+		ResultSet rs = statement.executeQuery("SELECT * FROM event WHERE EventNr ='"+eventNr+"'");
 	
 		while(rs.next())
 		{
@@ -143,7 +143,7 @@ public class EventDAO
 				
 
 			 e = new Event(rs.getString("CategorieEvent"),
-                         rs.getInt("meldingNr"),
+                         rs.getInt("EventNr"),
                          rs.getInt("PersoonNr"),
                          rs.getInt("FotoNr"),
                          rs.getInt("Teller"),

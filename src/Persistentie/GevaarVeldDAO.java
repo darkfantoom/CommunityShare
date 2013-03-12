@@ -35,7 +35,7 @@ public class GevaarVeldDAO
 		try 
 		{
 			statement = connect.getConnection().createStatement();
-			ResultSet rs = statement.executeQuery("SELECT MeldingNr, Omschrijving FROM GevaarVeld WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
+			ResultSet rs = statement.executeQuery("SELECT GevaarNr, Omschrijving FROM gevaarveld WHERE Gemeente ='"+gemeente+"' Order by Datum decs ");
 			
 			while (rs.next()) 
 			{
@@ -48,7 +48,7 @@ public class GevaarVeldDAO
                                      Date datum= null;
 				 
 				GevaarVeld e = new GevaarVeld(categorieGevaar,
-                                        rs.getInt("MeldingNr"),
+                                        rs.getInt("GevaarNr"),
                                         persoonNr,
                                         fotoNr,
                                         teller,
@@ -69,18 +69,18 @@ public class GevaarVeldDAO
 		}
 		return Gegevenslijst;
 	}
-	public void verwijderenVanEenGevaarVeld(int meldingNr,int persoonNr) 
+	public void verwijderenVanEenGevaarVeld(int gevaarNr,int persoonNr) 
 	{
                 Connectie connect = new Connectie();
 		
 			try
                         {
-				String sql="DELETE FROM GevaarVeld WHERE ("
-                                        + "MeldingNr,"
+				String sql="DELETE FROM gevaarveld WHERE ("
+                                        + "GevaarNr,"
                                         + "PersoonNr) "
                                         + "VALUES(?,?)";			
 				PreparedStatement pstmt = connect.getConnection().prepareStatement(sql);	
-                                pstmt.setInt(1, meldingNr);
+                                pstmt.setInt(1, gevaarNr);
 				pstmt.executeUpdate();
 				pstmt.close();										
 				connect.closeConnection();
@@ -99,9 +99,9 @@ public class GevaarVeldDAO
                         try
                         {
                         // String categorieEvent, int meldingNr, int persoonNr, int fotoNr, int teller, String straatNaam, String gemeente, String omschrijving, Date datum		
-			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO GevaarVeld("
+			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO gevaarveld("
                                 + "CategorieGevaar,"
-                                + "MeldingNr,"
+                                + "GevaarNr,"
                                 + "PersoonNr,"
                                 + "FotoNr,"
                                 + "Teller,"
@@ -111,7 +111,7 @@ public class GevaarVeldDAO
                                 + "datum) "
                                 + "VALUES(?,?,?,?,?,?,?,?,?)");
 			pstmt.setString(1, gv.getCategorie());
-                        pstmt.setInt(2, gv.getMeldingNr());
+                        pstmt.setInt(2, gv.getGevaarNr());
                         pstmt.setInt(3,gv.getPersoonNr());
                         pstmt.setInt(4,gv.getFotoNr());
                         pstmt.setInt(5,gv.getTeller());
@@ -131,7 +131,7 @@ public class GevaarVeldDAO
 			System.out.println("Database error");
 		} 
 	}    
-    public GevaarVeld zoekLijstGevaarVeld(int meldingNr)
+    public GevaarVeld zoekLijstGevaarVeld(int gevaarNr)
 	{
 		
 		Statement statement;
@@ -140,7 +140,7 @@ public class GevaarVeldDAO
 		try
 	    {
 		statement = connect.getConnection().createStatement();
-		ResultSet rs = statement.executeQuery("SELECT * FROM GevaarVeld WHERE MeldingNr ='"+meldingNr+"'");
+		ResultSet rs = statement.executeQuery("SELECT * FROM gevaarveld WHERE GevaarNr ='"+gevaarNr+"'");
 	
 		while(rs.next())
 		{
@@ -149,7 +149,7 @@ public class GevaarVeldDAO
 				
 
 			 gv = new GevaarVeld(rs.getString("CategorieGevaar"),
-                         rs.getInt("meldingNr"),
+                         rs.getInt("GevaarNr"),
                          rs.getInt("PersoonNr"),
                          rs.getInt("FotoNr"),
                          rs.getInt("Teller"),
