@@ -32,7 +32,6 @@ public class PersoonDAO {
 		
 		Statement s = c.getConnection().createStatement();
 		ResultSet rs = s.executeQuery("SELECT * FROM persoon WHERE FacebookAccount ='"+facebookAccount+"' OR TwitterAccount='"+twitterAccount+"'");
-		//gaat in database zoeken waar wachtwoord en userid overeenkomen en haalt dat object eruit eruit 
 		rs.next();
 		//FacebookAccount=rs.getString("FacebookAccount");
                 
@@ -43,7 +42,7 @@ public class PersoonDAO {
                     Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), rs.getString("FacebookAccount"),twitterAccount);
 	
 		}
-                if(rs.getString("TwitterAccount").equals(twitterAccount))
+                else if(rs.getString("TwitterAccount").equals(twitterAccount))
                 {
                      facebookAccount = null;
                     Pers = new Persoon(rs.getInt("PersoonNr"), rs.getInt("Score"), facebookAccount,rs.getString("TwitterAccount"));
@@ -113,19 +112,19 @@ public class PersoonDAO {
 			try{
 					
 					
-					Statement s = connecti.getConnection().createStatement();//connectie maken
-					ResultSet rs = s.executeQuery("SELECT PersoonNr FROM persoon ORDER BY PersoonNr desc");
-					rs.next();
+					//Statement s = connecti.getConnection().createStatement();//connectie maken
+					//ResultSet rs = s.executeQuery("SELECT PersoonNr FROM Persoon ORDER BY PersoonNr desc");
+					//rs.next();
 					
 					
 				
-					String sql ="INSERT INTO Persoon(PersoonNr,Score,Email,FacebookAccount,TwitterAccount) VALUES(?,?,?,?)";
+					String sql ="INSERT INTO Persoon(FacebookAccount,TwitterAccount,Score) VALUES(?,?,?)";
 					
 				PreparedStatement pstmt = connecti.getConnection().prepareStatement(sql);
-				pstmt.setInt(1, Pers.getPersoonNr());	
-                                pstmt.setInt(2, Pers.getScore());
-				pstmt.setString(3, Pers.getFacebookAccount());
-                                pstmt.setString(4, Pers.getTwitterAccount());
+				//pstmt.setInt(1, Pers.getPersoonNr());	
+                                pstmt.setInt(3, Pers.getScore());
+				pstmt.setString(1, Pers.getFacebookAccount());
+                                pstmt.setString(2, Pers.getTwitterAccount());
 				
 				pstmt.executeUpdate();
 				
@@ -134,7 +133,7 @@ public class PersoonDAO {
 			}
 
 			catch (SQLException sqlException) {
-                        System.out.print("Database Error");
+                        System.out.print("Database Error ist iere ");
                         sqlException.getMessage();
 
 			System.exit(1);
