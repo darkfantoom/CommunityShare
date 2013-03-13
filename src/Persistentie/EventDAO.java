@@ -94,25 +94,24 @@ public class EventDAO
                         {
                         // String categorieEvent, int meldingNr, int persoonNr, int fotoNr, int teller, String straatNaam, String gemeente, String omschrijving, Date datum		
 			PreparedStatement pstmt = connect.getConnection().prepareStatement("INSERT INTO event("
-                                + "CategorieEvent,"
-                                + "EventNr,"
+                                
                                 + "PersoonNr,"
                                 + "FotoNr,"
                                 + "Teller,"
                                 + "StraatNaam,"
-                                + "gemeente,"
-                                + "omschrijving,"
-                                + "datum) "
-                                + "VALUES(?,?,?,?,?,?,?,?,?)");
-			pstmt.setString(1, e.getCategorie());
-                        pstmt.setInt(2, e.getEventNr());
-                        pstmt.setInt(3,e.getPersoonNr());
-                        pstmt.setInt(4,e.getFotoNr());
-                        pstmt.setInt(5,e.getTeller());
-                        pstmt.setString(6,e.getStraatNaam());
-                        pstmt.setString(7, e.getGemeente());
+                                + "Gemeente,"
+                                + "Date,"
+                                + "CategorieEvent,"
+                                + "Omschrijving)"
+                                + "VALUES(?,?,?,?,?,?,?,?)");
+			pstmt.setString(7, e.getCategorie());
+                        pstmt.setInt(1,e.getPersoonNr());
+                        pstmt.setInt(2,e.getFotoNr());
+                        pstmt.setInt(3,e.getTeller());
+                        pstmt.setString(4,e.getStraatNaam());
+                        pstmt.setString(5, e.getGemeente());
                         pstmt.setString(8, e.getOmschrijving());
-                        pstmt.setDate(9, e.getDatum());
+                        pstmt.setDate(6, e.getDatum());
                         
 					
 						
@@ -122,7 +121,7 @@ public class EventDAO
 
 		catch (SQLException sqlException) 
 		{
-			System.out.println("Database error");
+			System.out.println("Database error aanmakenvaneenevent");
 		} 
 	}    
     public Event zoekLijst(int eventNr)
