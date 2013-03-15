@@ -100,7 +100,7 @@ public class EventDAO
                                 + "Teller,"
                                 + "StraatNaam,"
                                 + "Gemeente,"
-                                + "Date,"
+                                + "Datum,"
                                 + "CategorieEvent,"
                                 + "Omschrijving)"
                                 + "VALUES(?,?,?,?,?,?,?,?)");
