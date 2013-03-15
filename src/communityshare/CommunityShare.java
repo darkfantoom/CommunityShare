@@ -46,6 +46,7 @@ public class CommunityShare {
         pd.voegEenPersoonToe(p);
         pd.voegEenPersoonToe(P2);*/
         
+        System.out.println("Epic");
         
 //een persoon doen login met een facebook of een twitter account
         ModelPersoon mp =  new ModelPersoon( );
