@@ -48,8 +48,9 @@ public class FotoDAO
 		}
 		return F;
 	}
-    public void nieuweFoto(Foto F) 
+    public int  nieuweFoto(Foto F) 
 	{
+             int primkey=0;
 		Connectie connecti = new Connectie();
 
 		try
@@ -57,29 +58,35 @@ public class FotoDAO
 			
 			Blob Foto=connecti.getConnection().createBlob();
 			OutputStream afbeeldingStream=Foto.setBinaryStream(1);
-			ImageIO.write(F.getFoto(),"png",afbeeldingStream);
+			ImageIO.write(F.getFoto(),"jpg",afbeeldingStream);
 			
 			//Statement s = connecti.getConnection().createStatement();//connectie maken
 			//ResultSet rs = s.executeQuery("SELECT FotoNr FROM Foto ORDER BY FotoNr desc");
 			//rs.next();			
-			PreparedStatement pstmt = connecti.getConnection().prepareStatement("INSERT INTO foto(FotoNr,Foto) VALUES(?,?)");
+			PreparedStatement pstmt = connecti.getConnection().prepareStatement("INSERT INTO foto(FotoNr,Foto) VALUES(?,?)",Statement.RETURN_GENERATED_KEYS);
 			pstmt.setInt(1, F.getFotoNr());
 			pstmt.setBlob(2, Foto);
 			
 						
 			pstmt.executeUpdate();
+                        ResultSet rs = pstmt.getGeneratedKeys();
+                        if (rs != null && rs.next()) {
+                        primkey = rs.getInt(1);
+                        }
+
 			connecti.closeConnection();
 		}
 
 		catch (SQLException sqlException) 
 		{
-                        System.out.print("Database Error");
+                        System.out.print("Database Error nieuwefoto");
                         sqlException.getMessage();
                         
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+                return primkey;
 	} 
 
 

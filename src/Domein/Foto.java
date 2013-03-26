@@ -9,7 +9,7 @@ public class Foto
     private int fotoNr;
     private BufferedImage foto;
 
-    
+
     public Foto(int fotoNr, BufferedImage foto) 
     {
         this.fotoNr = fotoNr;
